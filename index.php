@@ -2,7 +2,7 @@
 include("config.php");
 session_start();
 // NO HAY VARIABLE SESSION
-if (!isset($_SESSION['usuario'])){  
+if (!isset($_SESSION['rol'])){  
   
   // NO HAY POST
   if(!isset ($_POST['login'])){
@@ -12,7 +12,8 @@ if (!isset($_SESSION['usuario'])){
   else {       
 
     $usuario = $_POST['usuario'];
-    $password = $_POST['password']; 
+    $password = $_POST['password'];
+    $error = ''; 
     
     // Creo conexión
     $conn = new mysqli("$host:$port", $user, $dbpassword, $db);
@@ -30,16 +31,16 @@ if (!isset($_SESSION['usuario'])){
         while($row = $result->fetch_assoc()) {
 
             if($row["rol"] == 1){
-                $_SESSION['usuario'] = 'admin';
+                $_SESSION['rol'] = 'admin';
                 header('Location: /perfiles/admin.php'); 
             }
             else{
-                $_SESSION['usuario'] = 'usuario';
+                $_SESSION['rol'] = 'usuario';
                 header('Location: /perfiles/usuario.php');
             }
         }
     } else {
-        
+        $error = 'Usuario/Contraseña incorrecta';
     }
     $conn->close(); 
   }
@@ -54,7 +55,7 @@ if (!isset($_SESSION['usuario'])){
         <button name="login" id="b_login" class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 	    <!-- <a href="alta.php" name="Sign Up" id="signup" class="btn btn-lg btn-primary btn-block" type="submit">Create nuevo usuario</a> -->
 
-        <div id="message"></div>
+        <div id="message"><?php echo $error?></div>
       </form>
 
   
@@ -65,11 +66,11 @@ if (!isset($_SESSION['usuario'])){
   }
   else{
     
-    if(($_SESSION['usuario'] == 'admin')){
+    if(($_SESSION['rol'] == 'admin')){
         
          header('Location: /perfiles/admin.php');     
      }
-     else if(($_SESSION['usuario'] == 'usuario')){       
+     else if(($_SESSION['rol'] == 'usuario')){       
         echo 'soy user';
          header('Location: /perfiles/usuario.php');
      }
