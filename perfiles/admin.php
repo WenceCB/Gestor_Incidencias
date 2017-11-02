@@ -6,11 +6,9 @@ if(!isset($_SESSION['rol']) || (($_SESSION['rol'])!= 'admin' )){
 else{
     include('../header.html');
     ?>
+    <h1>Bienvenido <?php  echo $_SESSION['usuario'] ?></h1>
 
-
-    <?php 
-    echo "hola ADMIN";
-    ?>
+    
 
 
 

@@ -23,7 +23,7 @@ if (!isset($_SESSION['rol'])){
     } 
     
     
-    $sql = "SELECT rol FROM users WHERE usuario = '$usuario' and password = '$password'";
+    $sql = "SELECT rol, usuario FROM users WHERE usuario = '$usuario' and password = '$password'";
     $result = $conn->query($sql);
     // Si el contador de la consulta devuelve 1, es que hay usuario y password en la DB
     if ($result->num_rows > 0) {
@@ -31,11 +31,13 @@ if (!isset($_SESSION['rol'])){
         while($row = $result->fetch_assoc()) {
 
             if($row["rol"] == 1){
-                $_SESSION['rol'] = 'admin';
+                $_SESSION['rol'] = 'admin';               
+                $_SESSION['usuario'] = $row['usuario'];
                 header('Location: /perfiles/admin.php'); 
             }
             else{
                 $_SESSION['rol'] = 'usuario';
+                $_SESSION['usuario'] = $row['usuario'];
                 header('Location: /perfiles/usuario.php');
             }
         }
