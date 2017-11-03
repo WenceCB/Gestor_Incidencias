@@ -33,6 +33,7 @@ if (!isset($_SESSION['rol'])){
             if($row["rol"] == 1){
                 $_SESSION['rol'] = 'admin';               
                 $_SESSION['usuario'] = $row['usuario'];
+               
                 header('Location: /perfiles/admin.php'); 
             }
             else{
@@ -46,7 +47,7 @@ if (!isset($_SESSION['rol'])){
     }
     $conn->close(); 
   }
-  include('header.html');
+  include('html/header.html');
 ?>
 
       <form class="form-signin" name="form1" method="post" action="/">
@@ -63,7 +64,7 @@ if (!isset($_SESSION['rol'])){
   
 
   <?php
-  include('footer.html');
+  include('html/footer.html');
   // SI HAY VARIABLE SESSION
   }
   else{
@@ -73,7 +74,7 @@ if (!isset($_SESSION['rol'])){
          header('Location: /perfiles/admin.php');     
      }
      else if(($_SESSION['rol'] == 'usuario')){       
-        echo 'soy user';
+        
          header('Location: /perfiles/usuario.php');
      }
      else{        

@@ -4,10 +4,10 @@ if(!isset($_SESSION['rol']) || (($_SESSION['rol'])!= 'usuario' )){
     header("location: ../index.php");
 }
 else{
-    include('../header.html');
+    include('../html/header.html');
     ?>
     <h1>Bienvenido a tu zona de incidencias <?php  echo $_SESSION['usuario'] ?></h1>
-    <form class="form-signup" id="usersignup" name="usersignup" method="post" action="createuser.php">
+    <form class="form-signup" id="usersignup" name="usersignup" method="post" action="incidencia.php">
    
     
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Aquí tu incidencia ..." autofocus></textarea>
@@ -23,6 +23,6 @@ else{
 
 
 <?php
-include('../footer.html');
+include('../html/footer.html');
 }
 ?>
