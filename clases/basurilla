@@ -1,0 +1,23 @@
+$(document).ready(function(){
+     $("#b_actualizar").click(function(){  
+        
+        $.get("../clases/ver_incidencias.php", function(data, status, dataType){     
+           
+           
+           //console.log(JSON.parse(data));
+           var resultado = JSON.parse(data);          
+           for (i=0;i<resultado.incidencia.length;i++){
+            $('#tabla_incidencias').append(
+             
+                '<div class="alert alert-success" id="'+resultado.incidencia[i].id+'">' + resultado.incidencia[i].mensaje + '</div>');
+                '<tr>'+
+                '<th scope ="row">'+i+'</th>'+
+                '<td>'+resultado.incidencia[i].id_usuario+'</td>'+
+                '<td>'+resultado.incidencia[i].departamento+'</td>'+
+                '<td>'+resultado.incidencia[i].fecha+'</td>'+
+                '</tr>'                
+           }
+        });
+        event.preventDefault();
+   });
+});

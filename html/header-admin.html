@@ -7,7 +7,10 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link href="../css/main.css" rel="stylesheet" media="screen">
-  </head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> <!-- load jquery via CDN -->
+   <script src="../clases/ajax.js"></script>
+</head>
 
   <body>
     <div class="container">
+    <h1>Bienvenido <?php  echo $_SESSION['usuario'] ?></h1>

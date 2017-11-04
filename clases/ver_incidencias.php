@@ -25,7 +25,7 @@ $data 			= array(); 		// array para enviar
         } 
         
         
-        $sql = "SELECT id, id_usuario, mensaje, estado FROM incidencias";
+        $sql = "SELECT id, id_usuario, mensaje, departamento, fecha, estado FROM incidencias";
         $result = $conn->query($sql);
         // Si el contador de la consulta devuelve 1, es que hay incidencias
         if ($result->num_rows > 0) {
