@@ -5,8 +5,10 @@ include("../config.php");
 $errors         = array();  	// array con los posibles errores
 $data 			= array(); 		// array para enviar
 
+
 // Validar las variables ======================================================
-	
+    $id_bd = $_POST['id_bd'];
+    $estado = $_POST['estado'];
 
 
 // Devolver respuesta ===========================================================
@@ -24,22 +26,16 @@ $data 			= array(); 		// array para enviar
             die("Problema de conexión: " . $conn->connect_error);
         } 
         
+        $fecha= date("d-m-Y H:i:s");
+        $sql = "UPDATE `incidencias` SET `estado` = $estado,  `fecha_estado` = '$fecha' WHERE `incidencias`.`id` = $id_bd";
         
-        $sql = "SELECT id, id_usuario, mensaje, departamento, fecha, estado, fecha_estado FROM incidencias";
-        $result = $conn->query($sql);
-        // Si el contador de la consulta devuelve 1, es que hay incidencias
-        if ($result->num_rows > 0) {
-            // Inserto el resultado en $row
-           
-            while($row = $result->fetch_assoc()) {                 
-                
-                $data['incidencia'][]= $row;
-               
-                
-            }
-        } else {
-            $error = 'No hay incidencias';
+        if ($conn->query($sql) == TRUE) {
+             echo'ok';        
         }
+        else{
+            $conn->error;   
+        }
+
         $conn->close(); 
         
 
@@ -47,7 +43,7 @@ $data 			= array(); 		// array para enviar
 		// show a message of success and provide a true success variable
 		$data['success'] = true;
 		$data['message'] = 'Incidencias Actualizadas!';
-	
-
+       
+        
 	// return all our data to an AJAX call
 	echo json_encode($data);

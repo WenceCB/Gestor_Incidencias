@@ -23,6 +23,9 @@ else{
       <th scope="col">Nombre</th>
       <th scope="col">Departamento</th>
       <th scope="col">Fecha</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Fecha Cambio Estado</th>
+
     </tr>
   </thead>  
 
