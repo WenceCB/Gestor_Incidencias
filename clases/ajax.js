@@ -5,15 +5,16 @@ $(document).ready(function(){
     var s_estado;
     var estado_a_cambiar;
   
-    $("#b_actualizar").click(function(){        
+    //$("#b_actualizar").click(function(){        
 
         $('#mensaje_incidencia').removeClass('alert alert-success')
         $('#mensaje_incidencia >').remove();
-
+   
         $('#tabla_incidencias > tr').remove(); 
        $.get("../clases/ver_incidencias.php", function(data, status, dataType){           
         
-          resultado = JSON.parse(data);          
+          resultado = JSON.parse(data);     
+          console.log(resultado);     
           for (i=0;i<resultado.incidencia.length;i++){               
               if (resultado.incidencia[i].estado == '0'){
                   nombre_estado = 'No realizada';                  
@@ -27,8 +28,8 @@ $(document).ready(function(){
            $('#tabla_incidencias').append(             
                '<tr>'+
                '<th scope ="row">'+resultado.incidencia[i].id+'</th>'+
-               '<td>'+resultado.incidencia[i].id_usuario+'</td>'+
-               '<td>'+resultado.incidencia[i].departamento+'</td>'+
+               '<td>'+resultado.incidencia[i].usuario+'</td>'+
+               '<td>'+resultado.incidencia[i].nombre_departamento+'</td>'+
                '<td>'+resultado.incidencia[i].fecha+'</td>'+
                '<td>'+nombre_estado+'</td>'+ 
                '<td>'+resultado.incidencia[i].fecha_estado+'</td>'+            
@@ -39,7 +40,7 @@ $(document).ready(function(){
             posicion[resultado.incidencia[i].id] = i;           
             
         };           
-
+    
            $(".b_mensaje").click(function(){              
             $(".b_mensaje").removeClass('btn btn-primary btn-lg active').text('Ver Incidencia');;  
             $(this).addClass('btn btn-primary btn-lg active').text('Ocultar Incidencia'); 
@@ -62,7 +63,7 @@ $(document).ready(function(){
                 if (id_s_estado.value != resultado.incidencia[posicion[id]].estado){
                     
                     $.post("../clases/actualizar_incidencias.php", {"id_bd" : id,"estado" : id_s_estado.value},function(data){  
-                        // Refrescar para volver a actualizar
+                        $("#b_actualizar").trigger('click');
                     });                                    
                 } 
                                
@@ -71,6 +72,6 @@ $(document).ready(function(){
           
        });       
        event.preventDefault();
-  }); 
+  //}); 
  
 });

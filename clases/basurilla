@@ -21,3 +21,15 @@ $(document).ready(function(){
         event.preventDefault();
    });
 });
+
+
+// Recuperar incidencias y grabar  datos de sessión para el post
+    $("#b_enviar_incidencia").click(function(){
+        var datos={
+            'mensaje' 	: $('textarea[name=t_incidencia]').val()
+        };        
+        $.post("../clases/prueba.php",datos,function(data){  
+            console.log(data);
+        }); 
+        
+    });

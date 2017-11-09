@@ -4,7 +4,7 @@ include("config.php");
 
 $errors         = array();  	// array con los posibles errores
 $data 			= array(); 		// array para enviar
-
+echo $POST['data'];
 // Validar las variables ======================================================
 	
 

@@ -4,21 +4,43 @@ if(!isset($_SESSION['rol']) || (($_SESSION['rol'])!= 'usuario' )){
     header("location: ../index.php");
 }
 else{
-    include('../html/header.html');
+    include('../html/header-user.html');
     ?>
     <h1>Bienvenido a tu zona de incidencias <?php  echo $_SESSION['usuario'] ?></h1>
-    <form class="form-signup" id="usersignup" name="usersignup" method="post" action="incidencia.php">
+    <form class="form-signin" id="form1" method="GET" action="">  
    
     
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Aquí tu incidencia ..." autofocus></textarea>
+    <textarea class="form-control" id="t_incidencia" name ="t_incidencia" rows="5" placeholder="Aquí tu incidencia ..." autofocus></textarea>
     
     <br>
     
-    <button name="Submit" id="submit" class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+    <button name="Submit" id="b_enviar_incidencia" class="btn btn-lg btn-primary btn-block" type="submit">Enviar Incidencia</button>
 
     <div id="message"></div>
-    </form>
-
+    </form>   
+    
+    <h2>Mis Incidencias</h2>
+    <table class="table table-hover" >
+    
+    <thead>
+      
+      <tr>
+        <th scope="col">Id Tarea</th>      
+        <th scope="col">Fecha</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Fecha Cambio Estado</th>
+  
+      </tr>
+    </thead>  
+  
+  <tbody id="tabla_incidencias">
+  
+  </tbody>  
+  </table>
+  <div id="mensaje_incidencia"> 
+  </div>
+  <div id="mensaje_admin">  
+  </div>
 
 
 
