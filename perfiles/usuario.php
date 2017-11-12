@@ -5,47 +5,40 @@ if(!isset($_SESSION['rol']) || (($_SESSION['rol'])!= 'usuario' )){
 }
 else{
     include('../html/header-user.html');
-    ?>
-    <h1>Bienvenido a tu zona de incidencias <?php  echo $_SESSION['usuario'] ?></h1>
-    <form class="form-signin" id="form1" method="GET" action="">  
-   
-    
-    <textarea class="form-control" id="t_incidencia" name ="t_incidencia" rows="5" placeholder="Aquí tu incidencia ..." autofocus></textarea>
-    
-    <br>
-    
-    <button name="Submit" id="b_enviar_incidencia" class="btn btn-lg btn-primary btn-block" disabled type="submit">Enviar Incidencia</button>
+    ?>     
+    <form  id="form1" method="GET" action="">  
+      <div class="form-group">
+        <br>
+        <textarea class="form-control" id="t_incidencia" name ="t_incidencia" rows="5" placeholder="Aquí tu incidencia ..." autofocus></textarea>    
+        <br>      
+        <button name="Submit" id="b_enviar_incidencia" class="btn btn-lg btn-primary btn-block" disabled type="submit">Enviar Incidencia</button>
+      </div>
+      <div id="message"></div>
+    </form> 
 
-    <div id="message"></div>
-    </form>   
-    
-    <h2>Mis Incidencias</h2>
-    <table class="table table-hover" >
-    
-    <thead>
-      
-      <tr>
-        <th scope="col">Id Tarea</th>      
-        <th scope="col">Fecha</th>
-        <th scope="col">Estado</th>
-        <th scope="col">Fecha Cambio Estado</th>
-  
-      </tr>
-    </thead>  
-  
-  <tbody id="tabla_incidencias">
-  
-  </tbody>  
+    <div class="card-header text-center">
+      <h2>Mis Incidencias</h2>
+    </div>
+      <!-- Formateo de tabla -->
+    <table class="table table-hover text-center" >    
+      <thead>      
+        <tr>
+          <th scope="col">Id Tarea</th>      
+          <th scope="col">Fecha de Envío</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Fecha Cambio Estado</th>  
+        </tr>
+      </thead> 
+      <tbody id="tabla_incidencias">  
+      </tbody>  
   </table>
+  <!-- Div para mostrar los mensajes de la incidencias -->
   <div id="contenedor_usuario">
     <div id="mensaje_incidencia"> 
     </div>
     <div id="mensaje_admin">  
     </div>
   </div>
-
-
-
 <?php
 include('../html/footer.html');
 }

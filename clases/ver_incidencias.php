@@ -1,8 +1,11 @@
 <?php
 session_start();
+// Carlo librería de conexión
 include("../lib/config.php");
+// Compruebo si está seteada la variable de Sessión
 if (isset($_SESSION['rol'])){ 
 
+// Inicializo variables    
 $errors         = array();  	// array con los posibles errores
 $data 			= array(); 		// array para enviar
 
@@ -19,10 +22,12 @@ $data 			= array(); 		// array para enviar
         if ($conn->connect_error) {
             die("Problema de conexión: " . $conn->connect_error);
         } 
+        // Si quién llama es admin
         if($_SESSION['rol'] == 'admin'){
-        
+            // Realizo consulta
             $sql = "SELECT id, u.usuario, mensaje, mensaje_admin, d.nombre_departamento, fecha, estado, fecha_estado FROM incidencias, users u, departamentos d WHERE incidencias.id_usuario = u.id_usuario AND u.id_departamento = d.id_departamento ORDER BY id";
             $result = $conn->query($sql);
+
             // Si el contador de la consulta devuelve 1, es que hay incidencias
             if ($result->num_rows > 0) {
                 // Inserto el resultado en $row
@@ -39,10 +44,10 @@ $data 			= array(); 		// array para enviar
         } 
 
         else{
-         
-            // Cambiar por id
+            // Si quién llama es el admin, recupero su id            
             $id = $_SESSION['id'];
             $sql = "SELECT id,  mensaje, mensaje_admin, fecha, estado, fecha_estado FROM incidencias WHERE id_usuario ='$id' ORDER BY id";
+            // Realizo consulta
             $result = $conn->query($sql);
             // Si el contador de la consulta devuelve 1, es que hay incidencias
             if ($result->num_rows > 0) {
@@ -58,9 +63,10 @@ $data 			= array(); 		// array para enviar
             $conn->close();    
 
         }
-    // return all our data to an AJAX call
+    // Devuelvo resultado con json
 echo json_encode($data);
 }
+// Si no está seteada la sesión lo mando al index
 else{
     header("location: ../index.php");
 }
