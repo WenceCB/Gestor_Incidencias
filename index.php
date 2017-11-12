@@ -1,5 +1,5 @@
 <?php
-include("lib/config.php");
+require("lib/config.php");
 session_start();
 // No hay variable de sesión
 if (!isset($_SESSION['rol'])){  

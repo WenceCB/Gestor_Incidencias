@@ -1,7 +1,7 @@
 <?php
 session_start();
 // Carlo librería de conexión
-include("../lib/config.php");
+require("../lib/config.php");
 // Compruebo si está seteada la variable de Sessión
 if (isset($_SESSION['rol'])){ 
 
