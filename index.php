@@ -1,5 +1,5 @@
 <?php
-include("config.php");
+include("lib/config.php");
 session_start();
 // NO HAY VARIABLE SESSION
 if (!isset($_SESSION['rol'])){  
@@ -49,24 +49,9 @@ if (!isset($_SESSION['rol'])){
     }
     $conn->close(); 
   }
-  include('html/header.html');
-?>
-
-      <form class="form-signin" name="form1" method="post" action="/">
-        <h2 class="form-signin-heading">Incidencias | FOC</h2>
-        <input name="usuario" id="u_nombre" type="text" class="form-control" placeholder="Usuario" autofocus>
-        <input name="password" id="u_pass" type="password" class="form-control" placeholder="Password">
-       
-        <button name="login" id="b_login" class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-	    <!-- <a href="alta.php" name="Sign Up" id="signup" class="btn btn-lg btn-primary btn-block" type="submit">Create nuevo usuario</a> -->
-
-        <div id="message"><?php echo $error?></div>
-      </form>
-
-  
-
-  <?php
-  include('html/footer.html');
+    include('html/header.html');
+    include('html/login.html');  
+    include('html/footer.html');
   // SI HAY VARIABLE SESSION
   }
   else{

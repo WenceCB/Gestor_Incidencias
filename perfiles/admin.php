@@ -33,10 +33,14 @@ else{
 
 </tbody>  
 </table>
-<div id="mensaje_incidencia">
-  
+<div id="contenedor_admin">
+  <div id="mensaje_incidencia"> 
+  </div>
+  <div id="mensaje_admin">  
+  </div>
+  <div id="controles">    
+  </div> 
 </div>
-
 
 
 <?php

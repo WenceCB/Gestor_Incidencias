@@ -14,7 +14,7 @@ else{
     
     <br>
     
-    <button name="Submit" id="b_enviar_incidencia" class="btn btn-lg btn-primary btn-block" type="submit">Enviar Incidencia</button>
+    <button name="Submit" id="b_enviar_incidencia" class="btn btn-lg btn-primary btn-block" disabled type="submit">Enviar Incidencia</button>
 
     <div id="message"></div>
     </form>   
@@ -37,9 +37,11 @@ else{
   
   </tbody>  
   </table>
-  <div id="mensaje_incidencia"> 
-  </div>
-  <div id="mensaje_admin">  
+  <div id="contenedor_usuario">
+    <div id="mensaje_incidencia"> 
+    </div>
+    <div id="mensaje_admin">  
+    </div>
   </div>
 
 

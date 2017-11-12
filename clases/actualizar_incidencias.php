@@ -1,23 +1,25 @@
 <?php
-include("../config.php");
+session_start();
+include("../lib/config.php");
+if (isset($_SESSION['rol'])){ 
 
-
-$errors         = array();  	// array con los posibles errores
-$data 			= array(); 		// array para enviar
+    $errors         = array();  	// array con los posibles errores
+    $data 			= array(); 		// array para enviar
 
 
 // Validar las variables ======================================================
+
     $id_bd = $_POST['id_bd'];
     $estado = $_POST['estado'];
+    $mensaje_admin = $_POST['mensaje_admin'];
+    
 
 
 // Devolver respuesta ===========================================================
 
 	// Si hay errores devuelvo false con el error dado
 		$data['success'] = false;
-		$data['errors']  = $errors;
-
-	
+		$data['errors']  = $errors;	
 
         // Creo conexión
         $conn = new mysqli("$host:$port", $user, $dbpassword, $db);
@@ -25,25 +27,56 @@ $data 			= array(); 		// array para enviar
         if ($conn->connect_error) {
             die("Problema de conexión: " . $conn->connect_error);
         } 
+        if($_SESSION['rol'] == 'admin'){
+            $fecha= date("d-m-Y H:i:s");
+            $sql = "UPDATE `incidencias` SET `estado` = $estado, `mensaje_admin`= '$mensaje_admin',  `fecha_estado` = '$fecha' WHERE `incidencias`.`id` = $id_bd";
+            
+            if ($conn->query($sql) == TRUE) {
+                $data['message'] = 'Actualizacion de la Incidencia con Exito!';        
+            }
+            else{
+                $conn->error;  
+                $data['message'] = 'Problema con la Actualizacion de la incidencia!'; 
+            }
+
+            $conn->close(); 
+
+            // show a message of success and provide a true success variable
+            $data['success'] = true;
+		
+    }
+    else{          
+              
+            $id = $_SESSION['id'];            
+            $mensaje = $_POST['mensaje'];
+            $sql = "INSERT INTO `incidencias` (`id`, `id_usuario`, `mensaje`,  `fecha`, `estado`) VALUES (NULL, '$id', '$mensaje', CURRENT_TIMESTAMP, '0');";
+            
+            $result = $conn->query($sql);
+            // Si el contador de la consulta devuelve 1, es que hay incidencias
+            if ($result->num_rows > 0) {
+                // Inserto el resultado en $row
+            
+                while($row = $result->fetch_assoc()) {    
+                    
+                    $data['incidencia'][]= $row;                    
+                }
+            } else {
+                $error = 'Error, no se ha insertado la incidencia';
+            }
+            $conn->close();  
         
-        $fecha= date("d-m-Y H:i:s");
-        $sql = "UPDATE `incidencias` SET `estado` = $estado,  `fecha_estado` = '$fecha' WHERE `incidencias`.`id` = $id_bd";
-        
-        if ($conn->query($sql) == TRUE) {
-             echo'ok';        
         }
-        else{
-            $conn->error;   
-        }
+    
+    
+    // Devuelvo json con el resultado
+    echo json_encode($data);
 
-        $conn->close(); 
+}
+else{
+    header("location: ../index.php");
+}
+
+
+?>
         
-
-
-		// show a message of success and provide a true success variable
-		$data['success'] = true;
-		$data['message'] = 'Incidencias Actualizadas!';
-       
-        
-	// return all our data to an AJAX call
-	echo json_encode($data);
+	

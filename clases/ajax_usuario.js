@@ -4,12 +4,12 @@ $(document).ready(function(){
   var resultado;
   var posicion=[];
   // Muestro incidencias que tenga el usuario
-  console.log('Voy a entrar');
+
   $('#tabla_incidencias > tr').remove(); 
   $.get("../clases/ver_incidencias.php", function(data, status, dataType){           
-   console.log('aqui');
+   
      resultado = JSON.parse(data); 
-     console.log(resultado);         
+            
      for (i=0;i<resultado.incidencia.length;i++){               
          if (resultado.incidencia[i].estado == '0'){
              nombre_estado = 'No realizada';                  
@@ -33,26 +33,52 @@ $(document).ready(function(){
         posicion[resultado.incidencia[i].id] = i;   
     };           
     
-           $(".b_mensaje").click(function(){              
-            $(".b_mensaje").removeClass('btn btn-primary btn-lg active').text('Ver Incidencia');;  
-            $(this).addClass('btn btn-primary btn-lg active').text('Ocultar Incidencia'); 
-           
-            var id = this.id;
+           $(".b_mensaje").click(function(){    
+            if($(this).hasClass('btn btn-primary btn-lg active')) {          
+                $(this).removeClass('btn btn-primary btn-lg active').text('Ver Mi Incidencia');
+                $('#contenedor_usuario >').empty();
+                $('#mensaje_incidencia').removeClass('alert alert-success');
+                $('#mensaje_admin').removeClass('alert alert-success');
+            }
+            else{
+                $(".b_mensaje").removeClass('btn btn-primary btn-lg active').text('Ver Mi Incidencia');
+                $(this).addClass('btn btn-primary btn-lg active').text('Ocultar Mi Incidencia'); 
             
-            $('#mensaje_incidencia >').remove();
-            $('#mensaje_incidencia').addClass('alert alert-success').append(
-                '<h4 class="alert-heading"> Mi Incidencia</h4>'+
-                '<p>'+resultado.incidencia[posicion[id]].mensaje+'</p>'                 
-            );
-            $('#mensaje_admin >').remove();
-            $('#mensaje_admin').addClass('alert alert-danger').append(
-                '<h4 class="alert-heading">Comentario Admin</h4>'+
-                '<p>'+resultado.incidencia[posicion[id]].mensaje+'</p>'                 
-            );                          
-          });
-          
-       });       
-       event.preventDefault();
-  
- 
+                var id = this.id;
+                
+                $('#mensaje_incidencia >').remove();
+                $('#mensaje_incidencia').addClass('alert alert-success').append(
+                    '<h4 class="alert-heading"> Mi Incidencia</h4>'+
+                    '<p>'+resultado.incidencia[posicion[id]].mensaje+'</p>'                 
+                );
+                $('#mensaje_admin >').remove();
+                $('#mensaje_admin').addClass('alert alert-danger').append(
+                    '<h4 class="alert-heading">Comentario Admin</h4>'+
+                    '<p>'+resultado.incidencia[posicion[id]].mensaje_admin+'</p>'                 
+                ); 
+             }                         
+          });         
+       }); 
+       
+    $("#t_incidencia").on("keyup",function(){
+        
+        if($('#t_incidencia').val() == ''){
+            $('#b_enviar_incidencia').prop("disabled",true);
+            
+        }
+        else{
+            $('#b_enviar_incidencia').prop("disabled",false);
+        }        
+    });
+        // Recuperar incidencias y grabar  datos de sessión para el post
+        $("#b_enviar_incidencia").click(function(){       
+            console.log('entro');
+             var datos={
+                 'mensaje' 	: $('textarea[name=t_incidencia]').val()
+             };        
+             $.post("../clases/actualizar_incidencias.php",datos,function(data){  
+                 
+             });            
+        });     
+       
 });
