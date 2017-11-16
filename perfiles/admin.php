@@ -12,7 +12,7 @@ else{
         <button name="actualizar" id="b_actualizar" class="btn btn-lg btn-primary btn-block" type="submit">Ver Incidencias</button>
     </form>
     <!-- Formateo de tabla -->
-    <table class="table table-hover text-center" >  
+    <table class="table table-hover text-center table-responsive-sm">  
       <thead>    
         <tr>
           <th scope="col">id</th>

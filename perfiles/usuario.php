@@ -20,7 +20,7 @@ else{
       <h2>Mis Incidencias</h2>
     </div>
       <!-- Formateo de tabla -->
-    <table class="table table-hover text-center" >    
+      <table class="table table-hover text-center table-responsive-sm"> 
       <thead>      
         <tr>
           <th scope="col">Id Tarea</th>      
