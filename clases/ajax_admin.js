@@ -107,7 +107,7 @@ $(document).ready(function(){
                     }                              
                 },
                 $(".b_cambiar_estado").click(function(){ 
-                    var eliminar = confirm("Me has pulsado Mirlo");
+                    var eliminar = confirm("¿Quieres Eliminar la Incidencia?");
                     if (eliminar == true){
                         $.post("../clases/borrar_incidencias.php",{"id_bd" : id} ,function(data){
                             // Formateo el mensaje del alert
