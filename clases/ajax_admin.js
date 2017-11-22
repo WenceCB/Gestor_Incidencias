@@ -77,6 +77,9 @@ $(document).ready(function(){
                 $('#controles').append(                   
                     '<button class="b_cambiar_estado btn btn-danger ">Cambiar Estado</button>'
                 ),
+                $('#controles').append(                   
+                    '<button class="b_cambiar_estado btn btn-danger ">Borrar Incidencia</button>'
+                ),
                 // LLamo a la BD para cambiar el estado de la incidencia                          
                 $(".b_cambiar_estado").click(function(){ 
                    // Comprobar si el estado que se va a pasar a la BD es el mismo que ya existía.
@@ -102,7 +105,20 @@ $(document).ready(function(){
                     else{
                         alert('No voy a acceder a la BD para no cambiar NADA');                        
                     }                              
-                });  
+                },
+                $(".b_cambiar_estado").click(function(){ 
+                    var eliminar = confirm("Me has pulsado Mirlo");
+                    if (eliminar == true){
+                        $.post("../clases/borrar_incidencias.php",{"id_bd" : id} ,function(data){
+                            // Formateo el mensaje del alert
+                            mensaje_alert = JSON.parse(data);
+                            alert('El resultado de la operación es : '+ mensaje_alert.message);
+                            // Simulo un click en actualizar para "recargar" la página
+                            $('#b_actualizar').trigger('click');                                              
+                        });     
+                    }                    
+                })
+                );  
               }                                    
           });          
        });    
