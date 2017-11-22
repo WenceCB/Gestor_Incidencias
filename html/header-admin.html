@@ -2,21 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
+    <title>Incidencias | FOC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="../css/main.css" rel="stylesheet" media="screen">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> <!-- load jquery via CDN -->
     <script src="../clases/ajax_admin.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link href="../css/main.css" rel="stylesheet" media="screen">
-    
-   
 </head>
-  <body>      
-      <div>       
-         <a class="nav-link disabled text-right" href="../clases/logout.php">Logout</a>           
-      </div>          
-      <div class="container mx-auto">
+   <body>
+     <div>
+          <a class="badge badge-danger float-right"  href="../clases/logout.php">Logout</a>
+    </div>
+    <div id="contenedor mx-auto" class="container">
         <div class="card-header text-center">
             <h1>Bienvenido a tu zona de incidencias <?php  echo $_SESSION['usuario'] ?></h1>
           </div>
