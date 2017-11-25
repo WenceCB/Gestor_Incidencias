@@ -1,4 +1,4 @@
-#GESTOR INCIDENCIAS
+# GESTOR INCIDENCIAS
 
 ## MANUAL Desarrollador
 
@@ -43,7 +43,7 @@ ALTER TABLE users ADD CONSTRAINT fk_id_departamentos FOREIGN KEY (id_departament
 
 ***
 
-##USO DE LA APLICACIÓN
+## USO DE LA APLICACIÓN
 
 Una vez creada la base de datos e inicializada con los scripts anteriores, tenemos que incluir nuestra carpeta raíz Incidencias-FOC en la carpeta definida para que el servidor PHP pueda interpretarla.
 
@@ -75,7 +75,7 @@ Después de definir el puerto para la conexión ya tenemos la aplicación lista 
 
 
 
-#MANUAL USUARIO
+# MANUAL USUARIO
 
 Existe una versión ya desplegada de la aplicación bajo la siguiente dirección
 
@@ -126,7 +126,7 @@ Como en esta versión no he incluido un formulario para hacer solicitar el alta,
 
 ____
 
-#Datos para la conexión
+# Datos para la conexión
 
 **Aplicación en local**
 
