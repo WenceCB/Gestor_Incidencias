@@ -75,13 +75,13 @@ $(document).ready(function(){
                 ),                
                 $('#controles >').remove();
                 $('#controles').append(                   
-                    '<button class="b_cambiar_estado btn btn-danger ">Cambiar Estado</button>'
+                    '<button id="b_estado" class="b_cambiar_estado btn btn-danger ">Cambiar Estado</button>'
                 ),
                 $('#controles').append(                   
-                    '<button class="b_cambiar_estado btn btn-danger ">Borrar Incidencia</button>'
-                ),
+                    '<button id="b_borrar" class="b_cambiar_estado btn btn-danger ">Borrar Incidencia</button>'
+                )}; 
                 // LLamo a la BD para cambiar el estado de la incidencia                          
-                $(".b_cambiar_estado").click(function(){ 
+                $("#b_estado").click(function(){                   
                    // Comprobar si el estado que se va a pasar a la BD es el mismo que ya existía.
                     if (id_s_estado.value != resultado.incidencia[posicion[id]].estado || t_area_admin.value != resultado.incidencia[posicion[id]].mensaje_admin){
                         // Comprobar si el mensaje que le voy a pasar a la BD es el mismo o no, y en función creo una variable con unos parámetros u otros.
@@ -104,9 +104,9 @@ $(document).ready(function(){
                     // En caso de que el estado sea el mismo y no haya puesto un comentario, no accedo a la BD
                     else{
                         alert('No voy a acceder a la BD para no cambiar NADA');                        
-                    }                              
-                },
-                $(".b_cambiar_estado").click(function(){ 
+                    }                                            
+                });              
+                $("#b_borrar").click(function(){                    
                     var eliminar = confirm("¿Quieres Eliminar la Incidencia?");
                     if (eliminar == true){
                         $.post("../clases/borrar_incidencias.php",{"id_bd" : id} ,function(data){
@@ -117,9 +117,7 @@ $(document).ready(function(){
                             $('#b_actualizar').trigger('click');                                              
                         });     
                     }                    
-                })
-                );  
-              }                                    
+                });                                                
           });          
        });    
   }); 
